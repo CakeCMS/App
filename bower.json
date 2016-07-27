@@ -1,0 +1,26 @@
+{
+  "name": "cake-cms-app",
+  "description": "CakePHP CMS application",
+  "version": "1.0.0",
+  "keywords": [
+    "cakephp",
+    "cakephp cms"
+  ],
+  "author": "Sergey Kalistratov <kalistratov.s.m@gmail.com>",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components"
+  ],
+  "dependencies": {
+    "sweetalert": "*",
+    "materialize": "*",
+    "font-awesome": "*",
+    "fancybox": "*",
+    "uikit": "^2.26.4",
+    "bootstrap": "^3.3.6",
+    "jbzoo-jquery-factory": "*",
+    "jbzoo-utils": "^1.1.0",
+    "jquery": "^2.2"
+  }
+}

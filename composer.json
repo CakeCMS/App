@@ -1,0 +1,58 @@
+{
+    "name": "cake-cms/app",
+    "description": "CakePHP CMS application",
+    "type": "project",
+    "license": "MIT",
+    "minimum-stability": "stable",
+    "require": {
+        "php": ">=5.5.10",
+        "cakephp/cakephp": "~3.2",
+        "cakephp/migrations": "~1.0",
+        "cakephp/debug_kit": "~3.2",
+        "cakephp/plugin-installer": "*",
+        "mobiledetect/mobiledetectlib": "2.*",
+        "cake-cms/core": "@dev"
+    },
+    "require-dev": {
+        "jbzoo/phpunit": "^1.0",
+        "psy/psysh": "@stable",
+        "cakephp/bake": "~1.1"
+    },
+    "autoload": {
+        "psr-4": {
+            "App\\": "src"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "App\\Test\\": "./tests",
+            "Test\\App\\": "./tests/App/src"
+        }
+    },
+    "scripts": {
+        "test": [
+            "@manifest",
+            "@autoload",
+            "@phpunit",
+            "@phpmd",
+            "@phpcs",
+            "@phpcpd",
+            "@phploc"
+        ],
+        "update-all": [
+            "composer self-update --no-interaction",
+            "composer update --no-interaction --optimize-autoloader"
+        ],
+        "manifest": "composer validate --no-interaction",
+        "autoload": "composer dump-autoload --optimize --no-interaction",
+        "phpunit": "php ./vendor/phpunit/phpunit/phpunit --configuration ./phpunit.xml.dist",
+        "phpmd": "php ./vendor/phpmd/phpmd/src/bin/phpmd ./src text ./vendor/jbzoo/misc/phpmd/jbzoo.xml --verbose",
+        "phpcs": "php ./vendor/squizlabs/php_codesniffer/scripts/phpcs ./src --standard=./vendor/jbzoo/misc/phpcs/JBZoo/ruleset.xml --report=full",
+        "phpcpd": "php ./vendor/sebastian/phpcpd/phpcpd ./src --verbose",
+        "phploc": "php ./vendor/phploc/phploc/phploc ./src --verbose",
+        "coveralls": "php ./vendor/satooshi/php-coveralls/bin/coveralls --verbose",
+        "post-autoload-dump": [
+            "Cake\\Composer\\Installer\\PluginInstaller::postAutoloadDump"
+        ]
+    }
+}
