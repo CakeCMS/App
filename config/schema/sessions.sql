@@ -1,9 +1,15 @@
-# Copyright (c) Cake Software Foundation, Inc. (http://cakefoundation.org)
-#
-# Licensed under The MIT License
-# For full copyright and license information, please see the LICENSE.txt
-# Redistributions of files must retain the above copyright notice.
-# MIT License (http://www.opensource.org/licenses/mit-license.php)
+--
+-- CakeCMS App
+--
+-- This file is part of the of the simple cms based on CakePHP 3.
+-- For the full copyright and license information, please view the LICENSE
+-- file that was distributed with this source code.
+--
+-- @package   App
+-- @license   MIT
+-- @copyright MIT License http://www.opensource.org/licenses/mit-license.php
+-- @link      https://github.com/CakeCMS/App
+--
 
 CREATE TABLE sessions (
   id char(40) NOT NULL,

@@ -11,10 +11,11 @@
         "cakephp/debug_kit": "~3.2",
         "cakephp/plugin-installer": "*",
         "mobiledetect/mobiledetectlib": "2.*",
-        "cake-cms/core": "@dev"
+        "cake-cms/core": "@dev",
+        "cake-cms/backend": "@dev"
     },
     "require-dev": {
-        "jbzoo/phpunit": "^1.0",
+        "jbzoo/phpunit": "^1.10",
         "psy/psysh": "@stable",
         "cakephp/bake": "~1.1"
     },

@@ -30,3 +30,5 @@ webroot/js/libs/utils.min.js
 webroot/js/libs/jquery.min.js
 webroot/js/libs/jquery-factory.min.js
 webroot/css/libs/font-awesome.min.css
+
+webroot/css/cache

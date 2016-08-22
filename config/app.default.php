@@ -53,21 +53,30 @@ return [
     'App' => [
         'namespace' => 'App',
         'encoding' => env('APP_ENCODING', 'UTF-8'),
-        'defaultLocale' => env('APP_DEFAULT_LOCALE', 'en_US'),
+        'defaultLocale' => env('APP_DEFAULT_LOCALE', 'ru_RU'),
         'base' => false,
         'dir' => 'src',
+        'cacheDir' => 'cache',
         'webroot' => 'webroot',
         'wwwRoot' => WWW_ROOT,
-        // 'baseUrl' => env('SCRIPT_NAME'),
         'fullBaseUrl' => false,
         'imageBaseUrl' => 'img/',
         'cssBaseUrl' => 'css/',
         'jsBaseUrl' => 'js/',
+        'lessBaseUrl' => 'less/',
         'paths' => [
             'plugins' => [ROOT . DS . 'plugins' . DS],
             'templates' => [APP . 'Template' . DS],
             'locales' => [APP . 'Locale' . DS],
         ],
+    ],
+
+    /**
+     * Theme configure
+     */
+    'Theme' => [
+        'site'  => 'Frontend',
+        'admin' => 'Backend',
     ],
 
     /**
@@ -90,7 +99,7 @@ return [
      * enable timestamping regardless of debug value.
      */
     'Asset' => [
-        // 'timestamp' => true,
+        'timestamp' => true,
     ],
 
     /**
@@ -111,7 +120,7 @@ return [
          */
         '_cake_core_' => [
             'className' => 'File',
-            'prefix' => 'myapp_cake_core_',
+            'prefix' => 'cms_core_',
             'path' => CACHE . 'persistent/',
             'serialize' => true,
             'duration' => '+2 minutes',
@@ -126,7 +135,7 @@ return [
          */
         '_cake_model_' => [
             'className' => 'File',
-            'prefix' => 'myapp_cake_model_',
+            'prefix' => 'cms_model_',
             'path' => CACHE . 'models/',
             'serialize' => true,
             'duration' => '+2 minutes',

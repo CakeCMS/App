@@ -37,6 +37,7 @@ use Cake\Core\Configure;
 use Cake\Network\Request;
 use Cake\Utility\Security;
 use Cake\Error\ErrorHandler;
+use Core\Event\EventManager;
 use Cake\Routing\DispatcherFactory;
 use Cake\Console\ConsoleErrorHandler;
 use Cake\Datasource\ConnectionManager;
@@ -48,18 +49,12 @@ use Cake\Core\Configure\Engine\PhpConfig;
  */
 require __DIR__ . '/paths.php';
 
-// Use composer to load the autoloader.
+//  Use composer to load the autoloader.
+/** @noinspection PhpIncludeInspection */
 require ROOT . DS . 'vendor' . DS . 'autoload.php';
 
-/**
- * Bootstrap CakePHP.
- *
- * Does the various bits of setup that CakePHP needs to do.
- * This includes:
- *
- * - Registering the CakePHP autoloader.
- * - Setting the default application paths.
- */
+//  Bootstrap CakePHP.
+/** @noinspection PhpIncludeInspection */
 require CORE_PATH . 'config' . DS . 'bootstrap.php';
 
 /**
@@ -180,24 +175,11 @@ Request::addDetector('tablet', function ($request) {
  * Inflector::rules('transliteration', ['/å/' => 'aa']);
  */
 
-/**
- * Plugins need to be loaded manually, you can either load them one by one or all of them in a single call
- * Uncomment one of the lines below, as you need. make sure you read the documentation on Plugin to use more
- * advanced ways of loading plugins
- *
- * Plugin::loadAll(); // Loads all plugins at once
- * Plugin::load('Migrations'); //Loads a single plugin named Migrations
- *
- */
+//  Load Core plugin.
+Plugin::load('Core', ['bootstrap' => true, 'routes' => true]);
 
-Plugin::load('Core');
-Plugin::load('Migrations');
-
-// Only try to load DebugKit in development mode
-// Debug Kit should not be installed on a production system
-if (Configure::read('debug')) {
-    Plugin::load('DebugKit', ['bootstrap' => true]);
-}
+//  Load all plugins.
+require_once __DIR__ . '/plugins.php';
 
 /**
  * Connect middleware/dispatcher filters.
@@ -220,3 +202,5 @@ Type::build('date')
     ->useImmutable();
 Type::build('datetime')
     ->useImmutable();
+
+EventManager::loadListeners();

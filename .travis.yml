@@ -13,11 +13,7 @@ before_install:
   - sudo apt-get install npm
 
 script:
-  - npm install
-  - bower install
-  - gulp update
-  - composer update-all
-  - composer test
+  - make test-all
 
 after_script:
-  - composer coveralls
+  - make coveralls

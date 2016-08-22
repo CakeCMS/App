@@ -32,6 +32,11 @@ if (!defined('DS')) {
 define('ROOT', dirname(__DIR__));
 
 /**
+ * The full path to application dir.
+ */
+define('APP_ROOT', ROOT);
+
+/**
  * The actual directory name for the application directory. Normally
  * named 'src'.
  */
