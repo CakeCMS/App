@@ -179,7 +179,16 @@ Request::addDetector('tablet', function ($request) {
 Plugin::load('Core', ['bootstrap' => true, 'routes' => true]);
 
 //  Load all plugins.
-require_once __DIR__ . '/plugins.php';
+$plugins = [
+    'Migrations',
+];
+
+// Debug Kit should not be installed on a production system
+if (Configure::read('debug')) {
+    Plugin::load('DebugKit', ['bootstrap' => true]);
+}
+
+Plugin::loadList($plugins);
 
 /**
  * Connect middleware/dispatcher filters.
