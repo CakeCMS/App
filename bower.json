@@ -22,5 +22,8 @@
     "jbzoo-jquery-factory": "*",
     "jbzoo-utils": "^1.1.0",
     "jquery": "^2.2"
+  },
+  "resolutions": {
+    "jquery": "^2.2"
   }
 }
