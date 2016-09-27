@@ -28,6 +28,7 @@ if (!extension_loaded('mbstring')) {
     trigger_error('You must enable the mbstring extension to use CakePHP.', E_USER_ERROR);
 }
 
+use Core\Theme;
 use Core\Plugin;
 use Cake\Log\Log;
 use Cake\Cache\Cache;
@@ -38,7 +39,6 @@ use Cake\Network\Request;
 use Cake\Utility\Security;
 use Cake\Error\ErrorHandler;
 use Core\Event\EventManager;
-use Cake\Routing\DispatcherFactory;
 use Cake\Console\ConsoleErrorHandler;
 use Cake\Datasource\ConnectionManager;
 use Cake\Core\Configure\Engine\PhpConfig;
@@ -155,12 +155,11 @@ Security::salt(Configure::consume('Security.salt'));
  */
 Request::addDetector('mobile', function ($request) {
     $detector = new \Detection\MobileDetect();
-
     return $detector->isMobile();
 });
+
 Request::addDetector('tablet', function ($request) {
     $detector = new \Detection\MobileDetect();
-
     return $detector->isTablet();
 });
 
@@ -181,21 +180,24 @@ Plugin::load('Core', ['bootstrap' => true, 'routes' => true]);
 //  Load all plugins.
 $plugins = [
     'Migrations',
+    Configure::read('Theme.site'),
+    Configure::read('Theme.admin'),
 ];
 
-// Debug Kit should not be installed on a production system
+//  Debug Kit should not be installed on a production system
 if (Configure::read('debug')) {
     Plugin::load('DebugKit', ['bootstrap' => true]);
 }
 
 Plugin::loadList($plugins);
 
-/**
- * Connect middleware/dispatcher filters.
- */
-DispatcherFactory::add('Asset');
-DispatcherFactory::add('Routing');
-DispatcherFactory::add('ControllerFactory');
+//  Setup detector of theme.
+Request::addDetector('theme', function ($request) {
+    /** @var Cake\Network\Request $request */
+    $theme = Theme::setup($request->param('prefix'));
+    $request->offsetSet('theme', $theme);
+    return Plugin::loaded($theme);
+});
 
 /**
  * Enable immutable time objects in the ORM.
