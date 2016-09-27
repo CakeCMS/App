@@ -10,8 +10,8 @@
         "cakephp/debug_kit": "~3.2",
         "cakephp/plugin-installer": "*",
         "mobiledetect/mobiledetectlib": "2.*",
-        "cake-cms/core": "~1.0",
-        "cake-cms/backend": "~1.0"
+        "cake-cms/core": "1.0.*",
+        "cake-cms/backend": "1.0.*"
     },
     "require-dev": {
         "jbzoo/phpunit": "^1.10",
