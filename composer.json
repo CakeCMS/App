@@ -3,7 +3,6 @@
     "description": "CakePHP CMS application",
     "type": "project",
     "license": "MIT",
-    "minimum-stability": "stable",
     "require": {
         "php": ">=5.5.10",
         "cakephp/cakephp": "~3.2",
