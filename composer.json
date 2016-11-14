@@ -53,7 +53,7 @@
         "phpcpd": "php ./vendor/sebastian/phpcpd/phpcpd ./src --verbose",
         "phploc": "php ./vendor/phploc/phploc/phploc ./src --verbose",
         "coveralls": "php ./vendor/satooshi/php-coveralls/bin/coveralls --verbose",
-        "jquery-table": "bin/dev/jquery-table.sh",
+        "app-jquery-table": "bash ./bin/app-jquery-table.sh",
         "post-autoload-dump": [
             "Cake\\Composer\\Installer\\PluginInstaller::postAutoloadDump"
         ]

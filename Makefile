@@ -60,7 +60,7 @@ coveralls:
 	@echo ""
 
 prepare-app:
-	@make app-jquery-table
+	@composer app-jquery-table
 	@echo -e "\033[0;33m>>> \033[0;30;46m Install application npm \033[0m"
 	npm install
 	@echo ""
@@ -72,25 +72,3 @@ prepare-app:
 	@echo -e "\033[0;33m>>> \033[0;30;46m Application gulp update \033[0m"
 	gulp update
 	@echo ""
-
-app-jquery-table:
-	if [ "$1" == "dev" ]
-	then
-		FILE=$(pwd)/application/vendor/jquery-check-all/jquery-check-all.min.js
-		GITDIR="application/vendor"
-		echo -e "\033[0;33m>>> >>> >>> >>> >>> >>> >>> >>> \033[0;30;46m (DEV) Clone JQuery table check all \033[0m"
-
-	else
-		FILE=$(pwd)/vendor/jquery-check-all/jquery-check-all.min.js
-		GITDIR="vendor"
-		echo -e "\033[0;33m>>> >>> >>> >>> >>> >>> >>> >>> \033[0;30;46m Clone JQuery table check all \033[0m"
-	fi
-
-	if [ ! -f $FILE ]
-		then
-			echo -e "\033[0;33m>>> >>> >>> >>> >>> >>> >>> >>> \033[0;30;46m Clone JQuery table check all \033[0m"
-			git clone --depth=50 --branch=master https://github.com/markgx/jquery-check-all.git $GITDIR/jquery-check-all
-
-		else
-			echo -e "\033[0;33m>>> >>> >>> >>> >>> >>> >>> >>> \033[0;30;46m JQuery table all ready exists \033[0m"
-		fi
