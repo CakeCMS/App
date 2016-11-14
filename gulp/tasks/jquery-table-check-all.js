@@ -13,13 +13,12 @@
 
 'use strict';
 
-module.exports = {
-    path: {
-        vendor  : './vendor/',
-        webroot : './webroot/',
-        js      : './webroot/js/',
-        css     : './webroot/css/',
-        img     : './webroot/img/',
-        bower   : './bower_components/'
-    }
-};
+var gulp   = require('gulp'),
+    config = require('../config'),
+    source = config.path.vendor + '/jquery-check-all/jquery-check-all.min.js';
+
+gulp.task('update:jquery-table-check-all', function () {
+    return gulp
+        .src(source)
+        .pipe(gulp.dest(config.path.js + 'libs'));
+});

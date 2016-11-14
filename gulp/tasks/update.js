@@ -24,5 +24,6 @@ gulp.task('update', [
     'update:jbzoo-utils',
     'update:font-awesome',
     'update:materialize-css',
-    'update:jbzoo-jquery-factory'
+    'update:jbzoo-jquery-factory',
+    'update:jquery-table-check-all'
 ]);

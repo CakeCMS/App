@@ -179,6 +179,9 @@ Plugin::load('Core', ['bootstrap' => true, 'routes' => true]);
 
 //  Load all plugins.
 $plugins = [
+    'Search',
+    'Config',
+    'Community',
     'Migrations',
     Configure::read('Theme.site'),
     Configure::read('Theme.admin'),
