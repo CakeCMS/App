@@ -18,7 +18,8 @@ var gulp = require('gulp');
 gulp.task('update', [
     'update:uikit',
     'update:jquery',
-    'update:fancybox',
+    //'update:fancybox-2',
+    'update:fancybox-3',
     'update:bootstrap',
     'update:sweet-alert',
     'update:jbzoo-utils',

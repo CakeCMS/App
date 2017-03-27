@@ -44,15 +44,8 @@ class PagesController extends AppController
         if (!empty($path[0])) {
             $page = $path[0];
         }
-        $this->set(compact('page', 'subpage'));
 
-        try {
-            $this->render(implode('/', $path));
-        } catch (MissingTemplateException $e) {
-            if (Configure::read('debug')) {
-                throw new $e;
-            }
-            throw new NotFoundException();
-        }
+        $this->set(compact('page', 'subpage'));
+        $this->render(implode('/', $path));
     }
 }

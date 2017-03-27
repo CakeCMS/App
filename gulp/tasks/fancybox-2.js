@@ -48,7 +48,7 @@ var gulp     = require('gulp'),
         js      : js + 'libs'
     };
 
-gulp.task('update:fancybox', function () {
+gulp.task('update:fancybox-2', function () {
     //  Scripts
     gulp.src(config.js)
         .pipe(concate('fancybox.min.js'))
