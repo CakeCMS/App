@@ -183,6 +183,7 @@ $plugins = [
     'Config',
     'Community',
     'Migrations',
+    'Extensions',
     Configure::read('Theme.site'),
     Configure::read('Theme.admin'),
 ];
@@ -218,3 +219,4 @@ Type::build('datetime')
     ->useImmutable();
 
 EventManager::loadListeners();
+

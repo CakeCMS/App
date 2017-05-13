@@ -25,6 +25,7 @@ if (php_sapi_name() === 'cli-server') {
 
 require dirname(__DIR__) . '/vendor/autoload.php';
 
+use Core\Cms;
 use App\Application;
 use Cake\Http\Server;
 
@@ -33,3 +34,5 @@ $server = new Server(new Application(dirname(__DIR__) . '/config'));
 // Run the request/response through the application
 // and emit the response.
 $server->emit($server->run());
+
+Cms::getInstance();
