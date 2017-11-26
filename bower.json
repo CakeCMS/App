@@ -13,7 +13,7 @@
         "bower_components"
     ],
     "dependencies": {
-        "sweetalert": "*",
+        "sweetalert": "~1.1",
         "materialize": "*",
         "font-awesome": "*",
         "fancybox": "^3",
