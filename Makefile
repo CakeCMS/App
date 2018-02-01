@@ -63,8 +63,6 @@ coveralls:
 prepare-app:
 	@composer app-jquery-table
 	@echo -e "\033[0;33m>>> \033[0;30;46m Install application npm \033[0m"
-	npm install
-	@echo ""
 
 	@echo -e "\033[0;33m>>> \033[0;30;46m Install application bower \033[0m"
 	bower install

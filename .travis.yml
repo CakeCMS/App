@@ -6,6 +6,8 @@ php:
 before_script:
   - nvm install 6
   - npm install
+  - npm install --global bower
+  - npm install --global gulp
 
 matrix:
   fast_finish: true
