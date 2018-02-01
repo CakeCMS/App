@@ -18,6 +18,7 @@ var gulp = require('gulp');
 gulp.task('update', [
     'update:uikit',
     'update:jquery',
+    'update:slugify',
     //'update:fancybox-2',
     'update:fancybox-3',
     'update:bootstrap',
