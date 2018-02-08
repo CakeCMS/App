@@ -13,13 +13,13 @@
         "bower_components"
     ],
     "dependencies" : {
-        "materialize"           : "*",
         "font-awesome"          : "*",
         "jbzoo-jquery-factory"  : "*",
         "fancybox"              : "^3",
         "jquery-slugify"        : "~1.2",
         "sweetalert"            : "~1.1",
         "jquery"                : "^2.2",
+        "materialize"           : "0.99.0",
         "bootstrap"             : "^3.3.6",
         "jbzoo-utils"           : "^1.1.0",
         "uikit"                 : "^2.26.4"
