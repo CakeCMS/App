@@ -15,17 +15,22 @@
 
 var gulp    = require('gulp'),
     config  = require('../config'),
+    rename  = require('gulp-rename'),
     replace = require('gulp-replace'),
-    source  = config.path.bower + '/font-awesome',
+    source  = config.path.bower + '/font-awesome/web-fonts-with-css',
     webroot = config.path.webroot,
     css     = config.path.css;
 
 gulp.task('update:font-awesome', function () {
-    gulp.src(source + '/fonts/*.*')
-        .pipe(gulp.dest(webroot + '/fonts'));
+    gulp.src(source + '/webfonts/*.*')
+        .pipe(gulp.dest(webroot + '/fonts/fa'));
 
-    gulp.src(source + '/css/font-awesome.min.css')
-        .pipe(replace(/\.\.\/fonts\//g, "../../fonts/"))
+    gulp.src(source + '/css/fontawesome-all.min.css')
+        .pipe(replace(/\.\.\/webfonts\//g, "../../fonts/fa/"))
         .pipe(replace("''", "'"))
+        .pipe(rename({
+            basename : 'font-awesome',
+            suffix   : '.min'
+        }))
         .pipe(gulp.dest(css + 'libs'));
 });
