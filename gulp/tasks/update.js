@@ -25,6 +25,7 @@ gulp.task('update', [
     'update:sweet-alert',
     'update:jbzoo-utils',
     'update:font-awesome',
+    'update:img-area-select',
     'update:materialize-css',
     'update:jbzoo-jquery-factory',
     'update:jquery-table-check-all'
