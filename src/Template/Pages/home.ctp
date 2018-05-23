@@ -6,17 +6,18 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  *
- * @package   App
- * @license   MIT
- * @copyright MIT License http://www.opensource.org/licenses/mit-license.php
- * @link      https://github.com/CakeCMS/App".
- * @author    Sergey Kalistratov <kalistratov.s.m@gmail.com>
+ * @package     App
+ * @license     MIT
+ * @copyright   MIT License http://www.opensource.org/licenses/mit-license.php
+ * @link        https://github.com/CakeCMS/App".
+ * @author      Sergey Kalistratov <kalistratov.s.m@gmail.com>
  */
+
 use Cake\Cache\Cache;
-use Cake\Core\Configure;
 use Cake\Core\Plugin;
-use Cake\Datasource\ConnectionManager;
+use Cake\Core\Configure;
 use Cake\Error\Debugger;
+use Cake\Datasource\ConnectionManager;
 use Cake\Network\Exception\NotFoundException;
 
 $this->layout = false;
@@ -104,7 +105,7 @@ $cakeDescription = 'CakePHP: the rapid development PHP framework';
                     <p class="problem">Your logs directory is NOT writable.</p>
                 <?php endif; ?>
 
-                <?php $settings = Cache::config('_cake_core_'); ?>
+                <?php $settings = Cache::getConfig('_cake_core_'); ?>
                 <?php if (!empty($settings)): ?>
                     <p class="success">The <em><?= $settings['className'] ?>Engine</em> is being used for core caching. To change the config edit config/app.php</p>
                 <?php else: ?>

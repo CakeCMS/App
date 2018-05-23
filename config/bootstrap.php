@@ -6,37 +6,21 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  *
- * @package   App
- * @license   MIT
- * @copyright MIT License http://www.opensource.org/licenses/mit-license.php
- * @link      https://github.com/CakeCMS/App".
- * @author    Sergey Kalistratov <kalistratov.s.m@gmail.com>
+ * @package     App
+ * @license     MIT
+ * @copyright   MIT License http://www.opensource.org/licenses/mit-license.php
+ * @link        https://github.com/CakeCMS/App".
+ * @author      Sergey Kalistratov <kalistratov.s.m@gmail.com>
  */
 
-// You can remove this if you are confident that your PHP version is sufficient.
-if (version_compare(PHP_VERSION, '5.5.9') < 0) {
-    trigger_error('You PHP version must be equal or higher than 5.5.9 to use CakePHP.', E_USER_ERROR);
-}
-
-// You can remove this if you are confident you have intl installed.
-if (!extension_loaded('intl')) {
-    trigger_error('You must enable the intl extension to use CakePHP.', E_USER_ERROR);
-}
-
-// You can remove this if you are confident you have mbstring installed.
-if (!extension_loaded('mbstring')) {
-    trigger_error('You must enable the mbstring extension to use CakePHP.', E_USER_ERROR);
-}
-
-use Core\Theme;
 use Core\Plugin;
 use Cake\Log\Log;
 use Cake\Cache\Cache;
 use Cake\Mailer\Email;
 use Cake\Database\Type;
 use Cake\Core\Configure;
-use Cake\Network\Request;
 use Cake\Utility\Security;
+use Cake\Http\ServerRequest;
 use Cake\Error\ErrorHandler;
 use Core\Event\EventManager;
 use Cake\Console\ConsoleErrorHandler;
@@ -48,10 +32,6 @@ use Cake\Core\Configure\Engine\PhpConfig;
  * constants
  */
 require __DIR__ . '/paths.php';
-
-//  Use composer to load the autoloader.
-/** @noinspection PhpIncludeInspection */
-require ROOT . DS . 'vendor' . DS . 'autoload.php';
 
 //  Bootstrap CakePHP.
 /** @noinspection PhpIncludeInspection */
@@ -80,16 +60,18 @@ try {
 // When debug = false the metadata cache should last
 // for a very very long time, as we don't want
 // to refresh the cache while users are doing requests.
-if (!Configure::read('debug')) {
-    Configure::write('Cache._cake_model_.duration', '+1 years');
-    Configure::write('Cache._cake_core_.duration', '+1 years');
+if (Configure::read('debug')) {
+    Configure::write('Cache._cake_model_.duration', '+2 minutes');
+    Configure::write('Cache._cake_core_.duration', '+2 minutes');
+    // disable router cache during development
+    Configure::write('Cache._cake_routes_.duration', '+2 seconds');
 }
 
 /**
  * Set server timezone to UTC. You can change it to another timezone of your
  * choice but using UTC makes time calculations / conversions easier.
  */
-date_default_timezone_set('UTC');
+date_default_timezone_set(Configure::read('App.defaultTimezone'));
 
 /**
  * Configure the mbstring extension to use the correct encoding.
@@ -138,10 +120,10 @@ if (!Configure::read('App.fullBaseUrl')) {
 
 Cache::setConfig(Configure::consume('Cache'));
 ConnectionManager::setConfig(Configure::consume('Datasources'));
-Email::configTransport(Configure::consume('EmailTransport'));
+Email::setConfigTransport(Configure::consume('EmailTransport'));
 Email::setConfig(Configure::consume('Email'));
 Log::setConfig(Configure::consume('Log'));
-Security::salt(Configure::consume('Security.salt'));
+Security::setSalt(Configure::consume('Security.salt'));
 
 /**
  * The default crypto extension in 3.0 is OpenSSL.
@@ -153,13 +135,14 @@ Security::salt(Configure::consume('Security.salt'));
 /**
  * Setup detectors for mobile and tablet.
  */
-Request::addDetector('mobile', function ($request) {
+ServerRequest::addDetector('mobile', function ($request) {
     $detector = new \Detection\MobileDetect();
+
     return $detector->isMobile();
 });
-
-Request::addDetector('tablet', function ($request) {
+ServerRequest::addDetector('tablet', function ($request) {
     $detector = new \Detection\MobileDetect();
+
     return $detector->isTablet();
 });
 
@@ -189,19 +172,11 @@ $plugins = [
 ];
 
 //  Debug Kit should not be installed on a production system
-if (Configure::read('debug')) {
+/*if (Configure::read('debug')) {
     Plugin::load('DebugKit', ['bootstrap' => true]);
-}
+}*/
 
 Plugin::loadList($plugins);
-
-//  Setup detector of theme.
-Request::addDetector('theme', function ($request) {
-    /** @var Cake\Network\Request $request */
-    $theme = Theme::setup($request->param('prefix'));
-    $request->offsetSet('theme', $theme);
-    return Plugin::loaded($theme);
-});
 
 /**
  * Enable immutable time objects in the ORM.
@@ -216,6 +191,8 @@ Type::build('time')
 Type::build('date')
     ->useImmutable();
 Type::build('datetime')
+    ->useImmutable();
+Type::build('timestamp')
     ->useImmutable();
 
 EventManager::loadListeners();

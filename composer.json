@@ -16,8 +16,8 @@
         "cake-cms/config"              : "~1.0",
         "cake-cms/community"           : "@dev",
         "cake-cms/backend"             : "~1.1",
-        "cake-cms/extensions"          : "@dev",
-        "cake-cms/test"                : "@dev"
+        "cake-cms/frontend"            : "@dev",
+        "cake-cms/extensions"          : "@dev"
     },
     "require-dev"  : {
         "cake-cms/test"          : "@dev",

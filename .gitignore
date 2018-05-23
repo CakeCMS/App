@@ -7,6 +7,7 @@ tmp
 logs
 config/app.php
 composer.lock
+package-lock.json
 
 ############################################# Ignore build static files ################################################
 webroot/fonts
